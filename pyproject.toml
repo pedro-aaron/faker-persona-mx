@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "faker-persona-mx"
-version = "2.0.0"
+version = "2.0.1"
 description = "Generador de datos ficticios de Personas Mexicanas (nombres, CURP, RFC, teléfonos, emails)"
 readme = "README.md"
 requires-python = ">=3.8"
