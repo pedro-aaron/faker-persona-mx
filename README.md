@@ -5,8 +5,6 @@
 
 Generador profesional de datos ficticios de personas mexicanas para testing, desarrollo y demostración.
 
-**Desarrollado por [@pedro-aaron](https://github.com/pedro-aaron)**
-
 ## Dataset Gigante
 
 - Más de 41,000 nombres mexicanos comunes
@@ -546,21 +544,21 @@ config.ENABLE_CACHE = False
 
 ### Próximas versiones
 
-- [x] **v0.1.0**: Release inicial en PyPI
-- [ ] **v0.2.0**: Asociación de nombres con sexo biológico
+- [x] **v0.2.0**: Release inicial en PyPI
+- [ ] **v0.3.0**: Asociación de nombres con sexo biológico
     - Clasificar nombres del dataset como masculinos, femeninos o unisex
     - Garantizar coherencia entre nombre y sexo en CURP
     - Permitir filtrado por sexo en generación
     - Estadísticas de distribución por sexo
-- [ ] **v0.3.0**: Direcciones completas mexicanas
+- [ ] **v0.4.0**: Direcciones completas mexicanas
     - Calles, colonias, códigos postales reales
     - Integración con datos del SEPOMEX
     - Validación de direcciones por estado
-- [ ] **v0.4.0**: Documentos de identidad
+- [ ] **v0.5.0**: Documentos de identidad
     - Generación de INE (credencial de elector)
     - Números de pasaporte mexicano
     - Licencias de conducir
-- [ ] **v0.5.0**: Personas morales
+- [ ] **v0.6.0**: Personas morales
     - Generación de empresas mexicanas (Razón Social)
     - RFC de personas morales
     - Giros empresariales
@@ -578,13 +576,13 @@ config.ENABLE_CACHE = False
 
 ### Limitaciones conocidas
 
-> **Importante**: En la versión actual (v0.1.0), los nombres no están asociados con el sexo biológico. Esto significa que:
+> **Importante**: En la versión actual (v0.2.0), los nombres no están asociados con el sexo biológico. Esto significa que:
 >
 > - Un nombre típicamente masculino puede asignarse con sexo 'M' o 'H' en la CURP de forma aleatoria
 > - Un nombre típicamente femenino puede tener sexo 'H' en la CURP
 > - La asignación de sexo es puramente aleatoria e independiente del nombre
 >
-> **Solución planificada**: La versión v0.2.0 incluirá un dataset clasificado de nombres por sexo, garantizando coherencia entre el nombre y el indicador de sexo en CURP/RFC.
+> **Solución planificada**: La versión v0.3.0 incluirá un dataset clasificado de nombres por sexo, garantizando coherencia entre el nombre y el indicador de sexo en CURP/RFC.
 
 ## Contribuir
 
@@ -600,14 +598,9 @@ config.ENABLE_CACHE = False
 
 Este proyecto está bajo la Licencia MIT. Ver archivo `LICENSE` para más detalles.
 
-## Créditos
+## Mantenedores
 
-**Desarrollado por**: [@pedro-aaron](https://github.com/pedro-aaron)
-
-- Datasets de nombres y apellidos recopilados de fuentes públicas mexicanas
-- Ladas telefónicas de México actualizadas a 2024
-- Generación de CURP/RFC basada en especificaciones oficiales del gobierno mexicano
-- Arquitectura de caché y seed para reproducibilidad determinística
+**Lead Developer**: [@pedro-aaron](https://github.com/pedro-aaron)
 
 ## Soporte
 
