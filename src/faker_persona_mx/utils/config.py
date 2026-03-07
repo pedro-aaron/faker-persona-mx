@@ -3,17 +3,42 @@ Configuración centralizada del proyecto.
 """
 
 import os
+import sys
 from pathlib import Path
 from typing import Optional
 from pydantic_settings import BaseSettings
+
+
+def _get_package_data_dir() -> Path:
+    """
+    Obtiene el directorio de datos del paquete, funciona tanto en desarrollo como instalado.
+
+    Returns:
+        Path al directorio data/ dentro del paquete faker_persona_mx
+    """
+    # Intentar usar importlib.resources primero (Python 3.9+)
+    try:
+        if sys.version_info >= (3, 9):
+            from importlib.resources import files
+            # files() retorna un Traversable que podemos convertir a Path
+            package_path = files("faker_persona_mx")
+            return Path(str(package_path)) / "data"
+    except (ImportError, TypeError, AttributeError):
+        pass
+
+    # Fallback: usar __file__ relativo al módulo actual
+    # Este archivo está en: faker_persona_mx/utils/config.py
+    # Necesitamos: faker_persona_mx/data/
+    current_file = Path(__file__).resolve()
+    package_root = current_file.parent.parent  # faker_persona_mx/
+    return package_root / "data"
 
 
 class Config(BaseSettings):
     """Configuración de la aplicación usando variables de entorno."""
 
     # Rutas
-    PROJECT_ROOT: Path = Path(__file__).parent.parent.parent.parent
-    DATA_DIR: Path = PROJECT_ROOT / "src" / "faker_persona_mx" / "data"
+    DATA_DIR: Path = _get_package_data_dir()
     DATASETS_DIR: Path = DATA_DIR / "datasets"
     CACHE_DIR: Path = DATA_DIR / "cache"
 

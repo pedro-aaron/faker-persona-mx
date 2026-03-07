@@ -5,6 +5,10 @@
 
 Generador profesional de datos ficticios de personas mexicanas para testing, desarrollo y demostración.
 
+> **⚠️ IMPORTANTE**: Las versiones **2.0.1** y **2.0.2** tienen errores fatales. **NO uses estas versiones**.
+>
+> **✅ Usa la versión 2.0.3 o superior** que corrige todos los problemas.
+
 ## Dataset Gigante
 
 - Más de 41,000 nombres mexicanos comunes
@@ -42,10 +46,40 @@ Total de combinaciones posibles: 41,000 x 17,000 x 17,000 x 32 = **380 billones 
 
 ## Instalación
 
-### Desde PyPI
+### Desde PyPI (Recomendado)
 
 ```bash
+# Instalar la última versión (2.0.2 o superior)
 pip install faker-persona-mx
+
+# O especificar la versión explícitamente
+pip install faker-persona-mx>=2.0.3
+```
+
+### ⚠️ Si ya tienes instalada la versión 2.0.1 o 2.0.2
+
+Si instalaste la versión **2.0.1** o **2.0.2** (que tienen errores fatales), necesitas actualizar a la **2.0.3**:
+
+```bash
+# Opción 1: Actualizar forzando reinstalación
+pip install --force-reinstall faker-persona-mx==2.0.3
+
+# Opción 2: Desinstalar y reinstalar
+pip uninstall faker-persona-mx -y
+pip install faker-persona-mx==2.0.3
+
+# Opción 3: Actualizar a la última versión disponible
+pip install --upgrade faker-persona-mx
+```
+
+Verificar que tienes la versión correcta:
+
+```bash
+pip show faker-persona-mx | grep Version
+# Debe mostrar: Version: 2.0.3 (o superior)
+
+# O desde Python
+python3 -c "import faker_persona_mx; print(faker_persona_mx.__version__)"
 ```
 
 ### Desde código fuente
@@ -583,6 +617,41 @@ config.ENABLE_CACHE = False
 > - La asignación de sexo es puramente aleatoria e independiente del nombre
 >
 > **Solución planificada**: La versión v0.3.0 incluirá un dataset clasificado de nombres por sexo, garantizando coherencia entre el nombre y el indicador de sexo en CURP/RFC.
+
+## Changelog
+
+### v2.0.3 (2026-03-06) - 🔥 HOTFIX CRÍTICO
+
+**✅ CORREGIDO**: Rutas de archivos CSV incorrectas en paquetes instalados
+
+- **Problema**: Las versiones 2.0.1 y 2.0.2 tenían errores al localizar los archivos CSV cuando el paquete se instalaba vía pip. El código usaba `Path(__file__).parent.parent.parent.parent` que no funciona en paquetes instalados.
+- **Solución**: Implementada función `_get_package_data_dir()` en `config.py` que usa `importlib.resources` (Python 3.9+) con fallback a rutas relativas al módulo actual. Ahora funciona correctamente tanto en desarrollo como en paquetes instalados.
+- **Cambios técnicos**:
+  - Nuevo helper `_get_package_data_dir()` para localizar archivos de datos
+  - Soporte para `importlib.resources.files()` (Python 3.9+)
+  - Fallback robusto usando `__file__` relativo al módulo
+  - Eliminada dependencia de `PROJECT_ROOT` que causaba problemas
+- **Acción requerida**: Si instalaste v2.0.1 o v2.0.2, actualiza inmediatamente:
+  ```bash
+  pip install --force-reinstall faker-persona-mx==2.0.3
+  ```
+
+### v2.0.2 (2026-03-06) - ❌ NO USAR (Error fatal de rutas)
+
+⚠️ **Esta versión tiene un error crítico y no debe usarse**. Aunque los CSV se incluyen en el paquete, el código no puede localizarlos correctamente cuando se instala vía pip, causando `FileNotFoundError`.
+
+### v2.0.1 (2026-03-05) - ❌ NO USAR (Error fatal de empaquetado)
+
+⚠️ **Esta versión tiene un error crítico y no debe usarse**. Los archivos CSV no se incluyen en la distribución, haciendo que el paquete sea completamente inoperable.
+
+### v2.0.0 (2026-03-04)
+
+- Refactorización completa de la arquitectura
+- Sistema de caché optimizado
+- CLI mejorado con Typer
+- Validaciones con Pydantic
+- Type hints completos
+- Logging profesional
 
 ## Contribuir
 
